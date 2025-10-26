@@ -1,0 +1,19 @@
+name: MLflow training
+
+on:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  train:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Install dependencies
+        run: python -m pip install --upgrade pip; pip install -r mlops_project_group1/requirements.txt
+      - name: Run training
+        run: python mlops_project_group1/src/train.py --data_path mlops_project_group1/data/heart.csv
